@@ -19,7 +19,7 @@ contract MyToken is ERC777 {
 	// TODO: Replace Token Name and Symbol
 	constructor() ERC777("MyTokenVersion2", "MT_V2", address(this)) {
 		owner = msg.sender; // Set Deployer Address as the Owner
-		priceFeed = AggregatorV3Interface(0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada); // TODO: Change to HBAR/USD -> 0x38C5ae3ee324ee027D88c5117ee58d07c9b4699b
+		priceFeed = AggregatorV3Interface(0x38C5ae3ee324ee027D88c5117ee58d07c9b4699b);
 	}
 
 	uint private otherTokenDeposited;
@@ -62,9 +62,9 @@ contract MyToken is ERC777 {
 		operatorSend(msg.sender, 0x000000000000000000000000000000000000dEaD, amount, "", ""); // Send the tokens to DEAD Address
 
 		uint tokensInCirculation = totalSupply() - tokensBurnt;
-		uint burnPrice = (tokensInCirculation * 100000000) / (otherTokenDeposited - otherTokenWithdrawn);
+		uint burnPrice = (tokensInCirculation * 1000000000) / (otherTokenDeposited - otherTokenWithdrawn);
 
-		uint otherTokenAmount = (amount / burnPrice) * 100000000;
+		uint otherTokenAmount = (amount / burnPrice) * 1000000000;
 		otherToken.transfer(msg.sender, otherTokenAmount); 																		// Transfer from THIS Contract to sender
 		
 
